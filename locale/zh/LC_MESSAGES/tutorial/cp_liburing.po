@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../tutorial/cp_liburing.rst:4
+msgid "``cp`` with liburing"
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:6
+msgid ""
+"In the :ref:`previous section <cat_liburing>`, we saw how to build the "
+"equivalent of the Unix ``cat`` utility using the high-level interface to "
+"``io_uring`` provided by liburing. We did not however queue more than one"
+" request at the same time in either of these examples. One of the life "
+"goals of ``io_uring`` is to be able to reduce the number of system calls "
+"required by letting users queue several operations at once so that the "
+"kernel can pick those up in one swoop and process them without the "
+"program having to go through one or more system calls for each I/O "
+"request."
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:8
+msgid ""
+"To that end, in this part, we build a copy program that copies files. It "
+"tries to be as efficient as possible by queuing as many requests as the "
+"queue depth will allow. Let’s see some code. To give credit where it is "
+"due, this is heavily based on `a program from the fio package "
+"<https://github.com/axboe/fio/blob/master/t/io_uring.c>`_."
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:259
+msgid "Program structure"
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:260
+msgid ""
+"This copy program, like most others, copies the file pointed to by the "
+"first argument into the file pointed to in the second argument. The core "
+"of the program is the :c:func:`copy_file` function. Here, we set up an "
+"outer ``while`` loop, which turn contains 2 other ``while`` loops at the "
+"same level nested within it. While the outer ``while`` loop is there to "
+"ensure that all bytes from the source file are copied, the first nested "
+"``while`` loop is tasked with creating as many :man:`readv(2)` type "
+"requests as possible. In fact, it enqueues as many as the queue depth "
+"will allow."
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:262
+msgid ""
+"Once the queue is full, we come to the second nested ``while`` loop. This"
+" loop reaps up completion queue entries and submits requests to write the"
+" destination file, now that the data is read. There are several variables"
+" that track state and it can get a little confusing. But how difficult "
+"can an asynchronous file copying program be? :)"
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:264
+msgid ""
+"**Based on** `unixism.net/2020/04/io-uring-by-example-part-2-queuing-"
+"multiple-requests/ <https://unixism.net/2020/04/io-uring-by-example-"
+"part-2-queuing-multiple-requests/>`_"
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:267
+msgid "Source code"
+msgstr ""
+
+#: ../../tutorial/cp_liburing.rst:268
+msgid ""
+"Source code for this and other examples is `available on Github "
+"<https://github.com/shuveb/loti-examples>`_."
+msgstr ""
+

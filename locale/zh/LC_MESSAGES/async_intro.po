@@ -1,0 +1,451 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../async_intro.rst:4
+msgid "Asynchronous Programming Under Linux"
+msgstr "Linux下的异步编程"
+
+#: ../../async_intro.rst:5
+msgid ""
+"We live in an age where most applications we use live on the cloud. Every"
+" time a user connects to a cloud-based application, most business logic, "
+"which is usually written on top of some kind of a web framework runs. "
+"Every request is handled either in a separate process, a separate thread,"
+" or in asynchronous programs, several requests are handled in the same "
+"process. Today, application frameworks based on thread pools and "
+"asynchronous models are equally popular. These applications mix calls to "
+"networking and file-related system calls in getting their job done."
+msgstr ""
+"我们生活在一个我们所使用的大多数应用程序都运行在云端的时代。当用户连接到基于云的应用程序时，大部分应用逻辑，通常基于某种web框架开发而成，就会运行。"
+"每个请求要么在一个独立的进程，要么在一个独立的线程中被处理，或者在异步的程序中，几个请求一同被处理。"
+"如今，基于线程池和异步模型的应用程序框架都很受欢迎。这些应用程序将网络和文件相关的系统调用统一以便更好的完成其工作"
+
+#: ../../async_intro.rst:8
+msgid "Processes"
+msgstr "进程"
+
+#: ../../async_intro.rst:9
+msgid ""
+"In general, when you call a system call like :man:`read(2)`, your program"
+" blocks until the file is read and the data is made available. This "
+"generally tends to be pretty fast and you usually do not realize that "
+"your program is blocking. But you probably also don't realize that your "
+"program, especially on a busy machine was probably switched out of the "
+"CPU to run other programs hundreds of times a second. When a system call "
+"blocks, your program is unblocked whenever the system call, running in "
+"kernel mode returns, continuing to run. If it is like most other "
+"programs, it will continue this cycle of blocking and unblocking every "
+"time it needs something from the operating system. This paradigm is "
+"simple to understand because events happens one after the other in a "
+"logical sequence--even though your program may be getting preempted to "
+"run other programs or it may be blocked by system calls. If you ignore "
+"the fact that your program is preempted to run other programs, it is as "
+"if your program executes its logic in sequence."
+msgstr ""
+"一般来讲，当你调用一个系统调用 如 :man:`read(2)`， 你的程序会阻塞直到文件被读取数据可用。"
+"这一过程通常很快你基本上不会感受到你的程序被阻塞。你可能也不知道你的程序，特别是在一个繁忙的机器上，每秒切换出CPU几百次去运行其他的程序。"
+"当系统调用阻塞时，只要系统调用，运行在内核模式下的程序返回，你的程序就会被解除阻塞，继续运行。"
+"如果像通常的程序哪样，每次需要操作系统提供一些东西时，它就会持续这种从阻塞到非阻塞的循环。"
+"这种模式很容易理解，因为事件是按照逻辑顺序一个接一个地发生的 -- 即使你的程序可能会被抢占去运行其他程序或者被系统调用所阻塞。"
+"如果你忽略你的程序被其他程序所抢占的情况，这就好比你的程序按顺序执行它的逻辑一样。"
+
+#: ../../async_intro.rst:12
+msgid "Multi-threaded programs"
+msgstr "多线程程序"
+
+#: ../../async_intro.rst:13
+msgid ""
+"In multi-threaded programs, this mental model extrapolates very well. "
+"There are many threads of execution in your program. These instances may "
+"be instances of the same logic (one instance of a thread created to deal "
+"with a client request) or otherwise (a dedicated thread always running in"
+" the background to clean up temporary files). These individual threads "
+"are preempted or blocked and unblocked by system calls. There are a few "
+"of them or several of them running, but this mental model is fairly "
+"scalable as well. There still are hairy things like locks and mutexes "
+"you'll encounter in your multi-threaded journey, however. But for our "
+"discussion, we shall most conveniently ignore them."
+msgstr ""
+"在多线程程序中，这种思维模型可以很好地进行推断。"
+"在你的程序里由很多线程在执行，这些实例可能具有相同逻辑（每个线程实例用来处理一个客户请求）。"
+"或者（一个专用线程始终在后台运行来清理临时文件）。这些单独的线程被系统调用所抢占或阻塞和非阻塞。"
+"有很少的几个在运行，但这种模式很好的可扩展，但是，在多线程过程中仍然会遇到一些麻烦，例如锁和互斥锁。 但是为了方便我们的讨论，我们先忽略它们。"
+
+#: ../../async_intro.rst:16
+msgid "Why asynchronous programming?"
+msgstr "为什么要异步编程？"
+
+#: ../../async_intro.rst:17
+msgid ""
+"If you are going to be building something that deals with thousands or "
+"even hundreds of thousands of requests per hour, you need not bother with"
+" asynchronous I/O. Application frameworks that are designed around thread"
+" pool based architectures will serve you just fine. But if you are "
+"looking at efficiently dealing with millions of requests per hour and you"
+" care about efficiency, you might want to look at asynchronous "
+"programming more closely. Asynchronous programming avoids the operating "
+"system’s thread/process context switching overhead by processing much of "
+"the I/O in a single thread. The operating system's context switching "
+"overhead may not seem like much, but it starts to matter when you are "
+"dealing with significant scale and concurrency."
+msgstr ""
+"如果你要开发一些服务每小时处理成千上万数量的请求，你没必要麻烦使用异步 I/O. 使用线程池架构的应用框架能很好的给你提供服务。"
+"但是你如果寻找更高效的，每小时处理上百万的请求，你更关心效率，你可能需要更的使用异步编程模式。"
+"异步编程避免操作系统在单线程里处理多个I/O操作导致的线程/进程上下文的切换负担。"
+"操作系统上下文切换的负担可能看起来并不多，但如果你处理大规模的并发的请求的时候就会很明显了。"
+
+#: ../../async_intro.rst:19
+msgid ""
+"Consider the following figure as depicting what happens in with a set of "
+"requests in one second. Threads move from blocked to running states. "
+"While it is clear what happens in the single threaded and multi-threaded "
+"apps, how asynchronous programming works can be a little tricky to "
+"understand, although it is no rocket science. I'm hoping the figure below"
+" will aid in your understanding."
+msgstr ""
+"参考下面的图片，该图描绘了一秒内一组请求的的处理情况。 线程从阻塞状态到运行状态。"
+"很清楚的描述了单线程和多线程的应用程序里会发生什么情况。"
+"异步编程的工作原理可能有些难于理解，尽管这不是火箭科学，我希望下图能帮助你去理解。"
+
+#: ../../async_intro.rst:25
+msgid ""
+"Below are charts from running experiments with an educational web server "
+"which is functionally the same but written using different Linux process "
+"models. Here are explanations for the names of the each of the "
+"architectures:"
+msgstr ""
+"下面图表来自对教育网站服务器进行的实验， 功能上相同，但使用不同的 Linux 进程模型。"
+"以下是每种架构名称的解释:"
+
+
+#: ../../async_intro.rst:27
+msgid ""
+"**Iterative**: This server type serves one request after another. While "
+"it is serving one request, other requests that might arrive have to wait "
+"till the previous one is done processing. There is `a limit "
+"<http://man7.org/linux/man-pages/man2/listen.2.html>`_ to how many "
+"requests the operating system will queue up. By default, Linux queues up "
+"to 128 for kernel versions below 5.4 and 4,096 in newer ones."
+msgstr ""
+
+#: ../../async_intro.rst:28
+msgid ""
+"**Forking**: This type of server creates a new process for each request "
+"that needs to be served. This way, requests don't have to wait for "
+"previous requests to get processed. Different processes server different "
+"requests. Also, when there are many processes or threads working, they "
+"tend to take advantage of multiple available CPU cores."
+msgstr ""
+"**Forking**: 这种类型的服务器为每个请求创建一个新的进程来处理。这种方式下，请求不需要等待前面的请求处理完。"
+"不同的的进程处理不同的请求。同时，也有很多进程和线程在工程，尽可能的利用多核的优势。"
+
+#: ../../async_intro.rst:29
+msgid ""
+"**Preforked**: This type of server avoids the overhead of having to "
+"create a totally new process every time a request needs to be served. It "
+"does this by creating a pool of processes that are assigned requests as "
+"they come in. Only when all the processes in the pool are busy should "
+"incoming requests have to wait for their turn to get processed. And "
+"administrators will usually have the ability to tweak the number of "
+"processes in the pool depending on the load they usually experience."
+msgstr ""
+"**Preforked**: 这种类型的服务器避免新的请求到来时创建新的全新进程的负担。"
+
+
+#: ../../async_intro.rst:30
+msgid ""
+"**Threaded**: This type of server spawns a new thread every time a "
+"request needs to be processed. Threads share a lot of data with the main "
+"process creating it and thus incur a slightly lower overhead during "
+"creation compared to creating a new process [#]_."
+msgstr ""
+
+#: ../../async_intro.rst:31
+msgid ""
+"**Prethreaded**: This is the threads equivalent of the preforked "
+"architecture. In this style, a pool of threads are created and threads "
+"from the pool are assigned requests as they come in. As in the preforked "
+"model, requests have to wait only if all threads are busy processing "
+"previously received requests. This is a very efficient model and is the "
+"one followed by most web application frameworks."
+msgstr ""
+"**Prethreaded**: 这个是和 preforked架构差不多的线程模式"
+"在这种风格中，会创建一个线程池，同时线程会被分配来处理收到的请求。 在 preforked 模式中，如果所有线程已经忙于处理之前的请求时，新的请求必须等待"
+"这是一个非常高效，也是大多数web应用框架使用的模型。"
+
+#: ../../async_intro.rst:32
+msgid ""
+"**Poll**: This type of server is single threaded and uses the "
+":man:`poll(2)` system call to multiplex between requests. :man:`poll(2)` "
+"however is a system call with a serious limitation: it has performance "
+"problems scaling to a large number of file descriptors. You can see this "
+"from the charts below. In this kind of a design, the state for each "
+"request is tracked and a series of callbacks to functions are made that "
+"take processing of that request to the next stage."
+msgstr ""
+
+
+#: ../../async_intro.rst:33
+msgid ""
+"**epoll** This is also a type of single-threaded, server that uses the "
+":man:`epoll(7)` family of system calls in place of :man:`poll(2)`, but is"
+" otherwise, architecturally the same."
+msgstr ""
+
+#: ../../async_intro.rst:35
+msgid ""
+"Now that we know what the names of the different architectures mean, "
+"let's take a look at how many requests per second they are able to "
+"process given a certain concurrency. The three charts below are from the "
+"same benchmark, but they zoom into the results to reveal them better."
+msgstr ""
+
+#: ../../async_intro.rst:46
+msgid ""
+"As you can see, prethreaded, or the thread pool based web server gives "
+"the :man:`epoll(7)` based server a run for its money up until a "
+"concurrency of 11,000 users in this particular benchmark. And that is a "
+"*lot* of concurrent users. Only *very* popular web services experience "
+"that kind of concurrency. This is very significant, given that in terms "
+"of complexity, thread pool based programs are *way* easier to code "
+"compared to their asynchronous counterparts. This also means they are way"
+" easier to maintain as well, since they are natually a lot easier to "
+"understand."
+msgstr ""
+
+#: ../../async_intro.rst:48
+msgid ""
+"Read my `article series <https://unixism.net/2019/04/linux-applications-"
+"performance-introduction/>`_ that takes a deep look at various Linux "
+"process models your application can use. This is done by building "
+"functionally same web servers based on various process architectures from"
+" scratch."
+msgstr ""
+"请阅读我 `系列文章 <https://unixism.net/2019/04/linux-applications-"
+"performance-introduction/>`_  更深的了解你的应用程序能使用的各种 Linux 处理模型"
+"主要是从零编写的基于不同的处理架构开发的功能相同的web服务器。"
+
+
+#: ../../async_intro.rst:51
+msgid "Making asynchronous programming easier"
+msgstr "使异步编程更容易"
+
+#: ../../async_intro.rst:52
+msgid ""
+"When you build a program with an asynchronous architecture, you usually "
+"use a high-level library that makes your life easier as a developer. "
+"Another choice is to layer your program in such a way that you deal with "
+"the asynchronous Linux interface in the lowest level while the higher "
+"layers provide a more easy-to-use interface on top of which you build "
+"features. A good example of a library that abstracts these low-level "
+"operating system interfaces are `libevent <https://libevent.org/>`_ and "
+"`libuv <https://libuv.org>`_, which powers `NodeJS "
+"<https://nodejs.org/en/>`_."
+msgstr ""
+"当你编写一个异步架构的程序时，你通常会使用一个更高级的库来使开发更为容易。"
+"另一个选择是将你的程序分层，异步处理的 Linux 接口在最底层，同时上层提供一个相对简单易用的接口来实现功能逻辑"
+"一个好的这样的例子是，抽象这些低级别的操作系统接口是 `libevent <https://libevent.org/>`_ 和 "
+"`libuv <https://libuv.org>`_, 提供给 `NodeJS "
+"<https://nodejs.org/en/>`_."
+
+#: ../../async_intro.rst:54
+msgid ""
+"Unless you are writing specialized applications like web frameworks or  "
+"high-performance network services, you generally don't need to deal with "
+"programming in these low-level APIs. But if you are curious and you want "
+"to understand how systems programs work, you are in the right place. In "
+"this world, curiosity never kills the cat. More often than not, it turns "
+"it into a tiger."
+msgstr ""
+"除非你在编写特定的应用程序，像web框架或高性能网络服务，你一般不需要处理这个低级别的API。"
+"但是如果你很好奇并想知道系统程序是如何工作的，你来对了地方。在这个世界上，好奇心从来不会杀死猫，更常见的结果是，是它会变成老虎"
+
+
+
+#: ../../async_intro.rst:56
+msgid ""
+"Web application frameworks like `Tornado <https://www.tornadoweb.org/>`_ "
+"and NodeJS make it easy for you to write web applications taking "
+"advantage of the performance that asynchronous I/O affords. If you were "
+"writing a web service, or these days a `desktop applications "
+"<https://www.electronjs.org/>`_, you might want to use these these "
+"frameworks since they allow you to write your business logic in a high-"
+"level language while retaining a lot of performance benefits."
+msgstr ""
+"Web应用框架， 像 `Tornado <https://www.tornadoweb.org/>`_ "
+"和 NodeJS 可以是你利用异步 I/O 提供的性能编写web应用。
+
+#: ../../async_intro.rst:59
+msgid "Linux asynchronous APIs before io_uring"
+msgstr "在io_uring之前的异步 API"
+
+#: ../../async_intro.rst:60
+msgid ""
+"We saw that, with synchronous programming, system calls that deal with "
+"reads or writes or remote connections in the case of :man:`accept(2)` "
+"would block until data is read, written or a client connection is "
+"available, respectively. Until then the said process or thread is "
+"blocked. What if you need to do something else? With threads, you can "
+"create other threads to take care of these other tasks. For example, the "
+"main thread could be blocked on :man:`accept(2)` so that new client "
+"connections are immediately attended to, while other threads could be "
+"processing requests from previous clients. But what if you needed to "
+"remain active to accept client connections while also trying to read from"
+" client sockets and while also trying to read or write local file, all in"
+" one thread? An FTP server serving(reads) and accepting(writes) files is "
+"dealing with both sockets and regular file descriptors, would be a great "
+"example. How do you do this in one thread or process? This is where "
+":man:`select(2)`, :man:`poll(2)` and the :man:`epoll(7)` family of system"
+" calls come in."
+msgstr ""
+"我们看到，使用同步编程，如:man:`accept(2)` 系统调用处理读和写或者远程连接时将会阻塞直到数据到来，或一个新的连接到来。"
+"直到那时，我们所说的进程或线程会被阻塞。如果我们需要做些其他事情怎么办？ 使用线程，你能创建其他的线程来处理这些其他的任务。"
+"如，主线程能阻塞在 :man:`accept(2)`  上，这样就可以立即处理新的客户端连接，而其他线程可能正在处理来自先前客户端的请求"
+"TODO 但是，如果您需要保持活动状态以接受客户端连接，同时又试图从客户端套接字读取数据，同时又试图读取或写入本地文件，该怎么办呢？ 一个提供（读取）和接受（写入）文件的FTP服务器正在处理套接字和常规文件描述符，这将是一个很好的例子。 您如何在一个线程或进程中执行此操作？"
+"TODO 这就是：man：`select（2）`，：man：`poll（2）和系统调用：man：`epoll（7）系列的出现。”
+
+
+
+#: ../../async_intro.rst:62
+msgid ""
+"These system calls allow you to monitor a bunch of file "
+"descriptors(sockets are file descriptors, too) and let you know when one "
+"or more of them are ready. Take for example an FTP sever is waiting to "
+"read the next command from a few connected clients while also listening "
+"on :man:`accept(2)` for any new client requests. The program would tell "
+":man:`select(2)`, :man:`poll(2)` or the :man:`epoll(7)` family of system "
+"calls to monitor these file descriptors and let the program know when "
+"there is any activity on one or more of them. For this, you need to "
+"structure your program very differently compared to how you'd have done "
+"for one that is based processing each request exclusively on a process or"
+" a thread."
+msgstr ""
+
+
+
+
+
+#: ../../async_intro.rst:64
+msgid ""
+"Linux's :man:`aio(7)` family of system calls can deal asynchronously with"
+" both files and sockets. However, there are some limitations that you "
+"need to be aware of:"
+msgstr ""
+
+#: ../../async_intro.rst:66
+msgid ""
+"Only files opened with ``O_DIRECT`` or those opened in unbuffered mode "
+"are supported by :man:`aio(7)`. This is undoubtedly its biggest "
+"limitation. Not all applications under the usual circumstances want to "
+"open files in unbuffered mode."
+msgstr ""
+
+#: ../../async_intro.rst:67
+msgid ""
+"Even in unbuffered mode, :man:`aio(7)` can block if file metadata isn't "
+"available. It will wait for that to be available."
+msgstr ""
+"甚至在无缓冲模式下， :man:`aio(7)` 如果文件元数据不可用也会阻塞，会等待直到可用 "
+
+
+
+#: ../../async_intro.rst:68
+msgid ""
+"Some storage devices have a fixed number of slots for requests. "
+":man:`aio(7)` submission can block if all these slots are busy."
+msgstr ""
+
+#: ../../async_intro.rst:69
+msgid ""
+"104 bytes in total need to be copied for submission and completion. There"
+" are also two different system calls (one each for submission and "
+"completion) that need to be made for I/O."
+msgstr ""
+
+#: ../../async_intro.rst:71
+msgid ""
+"The above limitations introduce a lot of uncertainty and performance "
+"overheads in the :man:`aio(7)` subsystem."
+msgstr ""
+
+#: ../../async_intro.rst:74
+msgid "The trouble with regular files"
+msgstr "常规文件的麻烦"
+
+#: ../../async_intro.rst:75
+msgid ""
+"On a server that is not very busy, reading or writing a file might not "
+"take a long time. Take our FTP server example from above written using an"
+" asynchronous design. When it is really busy with a lot of concurrent "
+"users who are downloading and uploading a lot of very large files all at "
+"the same time, there is one trouble you need to know about, as a "
+"programmer. On a server this busy, :man:`read(2)` and :man:`write(2)` "
+"calls can begin to block a lot. But won't the :man:`select(2)`, "
+":man:`poll(2)` or the :man:`epoll(7)` family of system calls help us "
+"here? Unfortunately not. These systems calls will *always* tell regular "
+"files as being ready for I/O. This is their Achilles' heel. We won't go "
+"into why this is, but it is important to understand that while they work "
+"really well for sockets, they always return \"ready\" for regular files."
+msgstr ""
+
+#: ../../async_intro.rst:77
+msgid ""
+"Unfortunately, this makes file descriptors non-uniform under asynchronous"
+" programming. File descriptors backing regular files are discriminated "
+"against. For this reason, libraries like ``libuv`` use a separate thread "
+"pool for I/O on regular files, exposing an API that hides this "
+"discrepancy from the user. Read `this excellent article "
+"<https://blog.libtorrent.org/2012/10/asynchronous-disk-io/>`_ that "
+"surveys asynchronous I/O APIs on various operating systems."
+msgstr ""
+
+
+
+#: ../../async_intro.rst:80
+msgid "Does this problem exist in io_uring?"
+msgstr "io_uring 存在这个问题吗？"
+
+#: ../../async_intro.rst:81
+msgid ""
+"No. ``io_uring`` presents a uniform interface whether dealing with "
+"sockets or with regular files. Also, due to the design of the API, "
+"programs can get data that is read or written to files descriptors "
+"directly rather than knowing when a file descriptor is ready and then "
+"starting an I/O operation on it subsequently, as is done with "
+":man:`poll(2)` or :man:`epoll(7)`. This is not the only advantage that "
+"``io_uring`` has over existing Linux asynchronous I/O APIs. We'll discuss"
+" more in upcoming sections."
+msgstr ""
+
+#: ../../async_intro.rst:83
+msgid "Footnotes"
+msgstr ""
+
+#: ../../async_intro.rst:84
+msgid ""
+"While creating threads or processes under Linux are both done with the "
+":man:`clone(2)` system call and incur the same overhead, right after "
+"creation, if a child process, which shared a read-only copy of the "
+"parent's address space writes to its pages, the kernel creates a copy of "
+"the parent's address space for the child, which is real overhead. Threads"
+" in a process share the address space and thus do not incur this copying "
+"overhead."
+msgstr ""
+

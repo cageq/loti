@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/setup_teardown.rst:5
+msgid "Setup and tear down"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:7
+msgid ""
+"This section describes functions that help you setup and tear down "
+"``io_uring`` usage in your programs."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:22
+msgid ""
+"TODO: Are the below two structs really required? Remove them if they are "
+"only used internally."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:65
+msgid ""
+"Initializes ``io_uring`` for use in your programs. You'd want to call "
+"this function before you get to do anything else with ``io_uring``."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:67
+#: ../../ref-liburing/setup_teardown.rst:94
+#: ../../ref-liburing/setup_teardown.rst:108
+#: ../../ref-liburing/setup_teardown.rst:122
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:69
+msgid ""
+"`entries`: the number of entries you want to request for the submission "
+"queue. Each request holds details about one I/O operation."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:70
+msgid ""
+"`ring`: pointer to :c:struct:`io_uring` structure which will be filled up"
+" by the kernel."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:71
+msgid "`flags`: flags you want to pass. See :ref:`io_uring_setup` for details."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:73
+#: ../../ref-liburing/setup_teardown.rst:112
+msgid ""
+"**Return value**: returns 0 on success and ``-errono`` on failure. You "
+"can use :man:`strerror(3)` to get a human readable version of the reason "
+"for failure."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:76
+msgid ":ref:`cat utility using liburing example <eg-cat-uring>`"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:82
+msgid ""
+"Functionally equivalent to :c:func:`io_uring_queue_init`, but "
+"additionally takes a pointer to :c:struct:`io_uring_params` structure, "
+"allowing you to specify your own :c:struct:`io_uring_params` structure."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:84
+msgid ""
+"In the :c:struct:`io_uring_params` structure, you can only specify "
+"``flags`` which can be used to set :ref:`various flags <io_uring_setup>` "
+"and ``sq_thread_cpu`` and ``sq_thread_idle`` fields, which are used to "
+"set the CPU affinity and submit queue idle time. Other fields of the "
+"structure are filled up by the kernel on return. When you use "
+":c:func:`io_uring_queue_init`, you don't get to specify these values. "
+"This function's existence solves this problem for you."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:86
+msgid "TODO: example program would help here."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:92
+msgid ""
+"This is a low-level function you'll only want to use when you want to "
+"control a lot of aspects of the ``io_uring`` initialization. Before "
+"calling this function, you should have already called the low-level "
+":c:func:`io_uring_setup`. You can then use this function to "
+":man:`mmap(2)` the rings for you."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:96
+msgid "`fd`: the file descriptor returned by :c:func:`io_uring_setup`"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:97
+msgid "`p`: a pointer to :c:struct:`io_uring_params`"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:98
+msgid "`ring`: a pointer to :c:struct:`io_uring`"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:100
+msgid ":ref:`io_uring low-level interface programming <low_level>`"
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:106
+msgid ""
+"Use this call if you do not want child processes of your process "
+"inheriting the ring mappings."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:110
+#: ../../ref-liburing/setup_teardown.rst:124
+msgid ""
+"`ring`: :c:struct:`io_uring` structure as setup by "
+":c:func:`io_uring_queue_init`."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:114
+msgid ":man:`madvice(2)`, especially ``MADV_DONTFORK``."
+msgstr ""
+
+#: ../../ref-liburing/setup_teardown.rst:120
+msgid ""
+"Tear down function for ``io_uring``. Unmaps all setup shared ring buffers"
+" and closes the low-level ``io_uring`` file descriptor returned by the "
+"kernel."
+msgstr ""
+

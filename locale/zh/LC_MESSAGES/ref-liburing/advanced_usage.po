@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/advanced_usage.rst:4
+msgid "Advanced usage"
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:11
+msgid ""
+"Register buffers to be used with fixed buffer operations such as "
+":c:func:`io_uring_prep_write_fixed` and "
+":c:func:`io_uring_prep_read_fixed`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:13
+#: ../../ref-liburing/advanced_usage.rst:35
+#: ../../ref-liburing/advanced_usage.rst:55
+#: ../../ref-liburing/advanced_usage.rst:77
+#: ../../ref-liburing/advanced_usage.rst:97
+#: ../../ref-liburing/advanced_usage.rst:119
+#: ../../ref-liburing/advanced_usage.rst:139
+#: ../../ref-liburing/advanced_usage.rst:159
+#: ../../ref-liburing/advanced_usage.rst:178
+#: ../../ref-liburing/advanced_usage.rst:193
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:15
+#: ../../ref-liburing/advanced_usage.rst:37
+#: ../../ref-liburing/advanced_usage.rst:57
+#: ../../ref-liburing/advanced_usage.rst:79
+#: ../../ref-liburing/advanced_usage.rst:99
+#: ../../ref-liburing/advanced_usage.rst:121
+#: ../../ref-liburing/advanced_usage.rst:141
+#: ../../ref-liburing/advanced_usage.rst:161
+#: ../../ref-liburing/advanced_usage.rst:180
+#: ../../ref-liburing/advanced_usage.rst:195
+msgid ""
+"`ring`: :c:struct:`io_uring` structure as set up by "
+":c:func:`io_uring_queue_init`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:16
+msgid "`iovecs`: pointer to ``iovec`` structure(s)."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:17
+msgid "`nr_iovecs`: number of structures ``iovec`` structures"
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:19
+#: ../../ref-liburing/advanced_usage.rst:39
+#: ../../ref-liburing/advanced_usage.rst:61
+#: ../../ref-liburing/advanced_usage.rst:81
+#: ../../ref-liburing/advanced_usage.rst:104
+#: ../../ref-liburing/advanced_usage.rst:124
+#: ../../ref-liburing/advanced_usage.rst:144
+#: ../../ref-liburing/advanced_usage.rst:163
+#: ../../ref-liburing/advanced_usage.rst:198
+msgid ""
+"**Return value**: returns 0 on success and ``-errono`` on failure. You "
+"can use :man:`strerror(3)` to get a human readable version of the reason "
+"for failure."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:23
+#: ../../ref-liburing/advanced_usage.rst:43
+msgid ""
+"Example program :ref:`Fixed Buffers <fixed_buffers>` that uses this "
+"function."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:24
+#: ../../ref-liburing/advanced_usage.rst:44
+#: ../../ref-liburing/advanced_usage.rst:66
+#: ../../ref-liburing/advanced_usage.rst:86
+#: ../../ref-liburing/advanced_usage.rst:108
+#: ../../ref-liburing/advanced_usage.rst:128
+#: ../../ref-liburing/advanced_usage.rst:148
+#: ../../ref-liburing/advanced_usage.rst:167
+msgid ":ref:`io_uring_register <io_uring_register>`"
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:33
+msgid "Unregister buffers registered by :c:func:`io_uring_register_buffers`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:53
+msgid ""
+"Register file descriptors to be used in subsequent operations, like those"
+" that involve submission queue pollig (``IORING_SETUP_SQPOLL``)."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:58
+msgid "`files`: pointer to an array of file descriptors."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:59
+msgid "`nr_files`: number of file descriptors in the array."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:65
+#: ../../ref-liburing/advanced_usage.rst:85
+msgid ""
+"Example program :ref:`Submission queue polling <sq_poll>` that uses this "
+"function."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:75
+msgid ""
+"Unregister file descriptors registered by "
+":c:func:`io_uring_register_files`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:95
+msgid ""
+"Update the set of file descriptors registered with "
+":c:func:`io_uring_register_files`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:100
+msgid "`off`: offset in the file descriptors array to update from."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:101
+msgid "`files`: array of file descriptors."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:102
+msgid "`nr_files`: number of file descriptors in the array supplied."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:117
+msgid ""
+"By registering an :man:`eventfd(2)` file descriptor with ``io_uring``, it"
+" is possible to get notified of completion events on an ``io_uring`` "
+"instance and this function lets you do just that."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:122
+#: ../../ref-liburing/advanced_usage.rst:142
+msgid "`fd`: the :man:`eventfd(2)` file descriptor"
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:137
+msgid ""
+"Same as :c:func:`io_uring_register_eventfd`, except notifications are "
+"only posted for events that complete in an async manner. This means that "
+"events that complete inline while being submitted do not trigger a "
+"notification event."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:157
+msgid "Unregister the registered :man:`eventfd(2)` file descriptor."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:176
+msgid ""
+"This operation registers credentials of the running application with "
+"``io_uring``, and returns an ID associated with these credentials. "
+"Applications wishing to share a ring between separate users/processes can"
+" pass in this credential ID in the SQE ``personality`` field. If set, "
+"that particular sqe will be issued with these credentials."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:182
+msgid ""
+"**Return value**: returns the personality ID on success and ``-errono`` "
+"on failure. You can use :man:`strerror(3)` to get a human readable "
+"version of the reason for failure."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:191
+msgid ""
+"Unregisters a personality previously registered with "
+":c:func:`io_uring_register_personality`."
+msgstr ""
+
+#: ../../ref-liburing/advanced_usage.rst:196
+msgid "`id`: the personality ID to unregister."
+msgstr ""
+

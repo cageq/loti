@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/completion.rst:5
+msgid "Completion"
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:8
+msgid "Introduction"
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:9
+msgid ""
+"These functions deal with completion of I/O requests in ``io_uring``. The"
+" snippet below is from the example :ref:`cat with "
+"liburing<cat_liburing>`. While there are other possible ways, it shows a "
+"general way in which you can use completion related functions. Once a "
+"request or multiple requests have been submitted, you can wait for a "
+"completion and process it as shown below."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:36
+msgid ""
+"You can wait for a completion by calling :c:func:`io_uring_wait_cqe`. "
+"This function blocks until at least one completion is available."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:37
+msgid ""
+"It fills up details of the completion in the :c:struct:`io_uring_cqe` "
+"structure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:38
+msgid ""
+"This structure's ``res`` member contains the return value of the system "
+"call that was executed as part of the request. For example, if "
+":c:func:`io_uring_prep_read` was called to process a :man:`read(2)` like "
+"request, ``res`` will contain the number of characters read or if it is "
+"less than zero, denotes that :man:`read(2)` faced an error."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:39
+msgid ""
+"In ``io_uring``, you can set a user data field in the submission side, "
+"which with kernel will then make available unchanged on the completion "
+"side. You can use this to uniquely identify requests. You can get the "
+"user data pointer from the CQE by calling "
+":c:func:`io_uring_cqe_get_data`."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:40
+msgid ""
+"Once you process the information you got from the completion, you need to"
+" mark the CQE as \"seen\". You can do this with the "
+":c:func:`io_uring_cqe_seen` function."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:43
+msgid "Reference"
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:47
+msgid "Returns an I/O completion, waiting for it if necessary."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:49 ../../ref-liburing/completion.rst:64
+#: ../../ref-liburing/completion.rst:83 ../../ref-liburing/completion.rst:107
+#: ../../ref-liburing/completion.rst:122 ../../ref-liburing/completion.rst:138
+#: ../../ref-liburing/completion.rst:152
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:51 ../../ref-liburing/completion.rst:66
+#: ../../ref-liburing/completion.rst:85 ../../ref-liburing/completion.rst:109
+#: ../../ref-liburing/completion.rst:124 ../../ref-liburing/completion.rst:154
+msgid ""
+"`ring`: :c:struct:`io_uring` structure as set up by "
+":c:func:`io_uring_queue_init`."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:52 ../../ref-liburing/completion.rst:67
+#: ../../ref-liburing/completion.rst:86 ../../ref-liburing/completion.rst:110
+#: ../../ref-liburing/completion.rst:125 ../../ref-liburing/completion.rst:155
+msgid "`cqe_ptr`: pointer to a pointer to a ``io_uring_cqe`` structure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:54 ../../ref-liburing/completion.rst:70
+#: ../../ref-liburing/completion.rst:91 ../../ref-liburing/completion.rst:112
+#: ../../ref-liburing/completion.rst:128 ../../ref-liburing/completion.rst:142
+msgid "**Return value**"
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:56
+msgid "Returns 0 with ``cqe_ptr`` filled in on success, -errno on failure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:62
+msgid ""
+"Return an IO completion, waiting for ``wait_nr`` completions if one isn't"
+" readily available."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:68 ../../ref-liburing/completion.rst:87
+msgid "`wait_nr`: number of completions to wait for."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:72 ../../ref-liburing/completion.rst:93
+msgid "Returns 0 with ``cqe_ptr`` filled in on success, ``-errno`` on failure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:79
+msgid ""
+"Like :c:func:`io_uring_wait_cqe`, except it accepts a timeout value as "
+"well. Note that an SQE is used internally to handle the timeout. "
+"Applications using this function must never set ``sqe->user_data`` to "
+"``LIBURING_UDATA_TIMEOUT``."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:81
+msgid ""
+"If ``ts`` is specified, the application need not call "
+":c:func:`io_uring_submit` before calling this function, as it will be "
+"done internally. From this it also follows that this function isn't safe "
+"to use for applications that split SQ and CQ handling between two threads"
+" and expect that to work without synchronization, as this function "
+"manipulates both the SQ and CQ side."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:88
+msgid "`ts`: pointer to a ``__kernel_timespec`` structure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:89
+msgid ""
+"`sigmask`: a pointer to ``sigset_t``, the set of signals to block. The "
+"prevailing signal mask is restored before returning."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:99
+msgid ""
+"Same as the :c:func:`io_uring_wait_cqes` except it does not take a "
+"``sigmask`` argument and always sets ``wait_nr`` to 1."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:105
+msgid "Returns an I/O completion, if one is readily available. Doesn't wait."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:114
+msgid "Returns 0 with cqe_ptr filled in on success, -errno on failure."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:120
+msgid ""
+"Fills in an array of I/O completions up to ``count``, if they are "
+"available, returning the count of completions filled. Does not wait for "
+"completions. They have to be already available for them to be returned by"
+" this function."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:126
+msgid "`count`: count of completions to fetch."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:130
+msgid "Returns the count of I/O completions filled."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:136
+msgid "Returns pointer to user data set with :c:func`io_uring_sqe_set_data`."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:140
+msgid "`cqe`: pointer to the CQE from which to fetch the user data pointer."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:144
+msgid "Returns pointer to user data."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:150
+msgid ""
+"Must be called after :c:func:`io_uring_peek_cqe` or "
+":c:func:`io_uring_wait_cqe` and after the cqe has been processed by the "
+"application."
+msgstr ""
+
+#: ../../ref-liburing/completion.rst:161
+msgid "TODO: add documentation"
+msgstr ""
+

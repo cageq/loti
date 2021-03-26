@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/sqe.rst:4
+msgid "SQE: Submission Queue Entry"
+msgstr ""
+
+#: ../../ref-liburing/sqe.rst:5
+msgid ""
+"The submission queue entry (SQE) is what you use to tell ``io_uring`` "
+"what you want to do, like read a file, write a file, accept a connection "
+"on a socket, etc."
+msgstr ""
+
+#: ../../ref-liburing/sqe.rst:8
+msgid ""
+"This structure is part of the raw ``io_uring`` interface and is defined "
+"in ``io_uring.h``."
+msgstr ""
+
+#: ../../ref-liburing/sqe.rst:12
+msgid "``struct io_uring_sqe``"
+msgstr ""
+

@@ -21,6 +21,8 @@ project = 'Lord of the io_uring'
 copyright = '2020, Shuveb Hussain'
 author = 'Shuveb Hussain'
 
+locale_dirs = ['locale/']   # path is example but recommended.
+gettext_compact = False     # optional.
 
 # -- General configuration ---------------------------------------------------
 

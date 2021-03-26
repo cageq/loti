@@ -1,0 +1,376 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-iouring/io_uring_setup.rst:4
+msgid "io_uring_setup"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:6
+msgid "io_uring_setup - setup a context for performing asynchronous I/O"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:9
+msgid "SYNOPSIS"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:18
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:20
+msgid ""
+"The io_uring_setup() system call sets up a submission queue (SQ) and "
+"completion queue (CQ) with at least *entries* entries, and returns a file"
+" descriptor which can be used to perform subsequent operations on the "
+"io_uring instance. The submission and completion queues are shared "
+"between userspace and the kernel, which eliminates the need to copy data "
+"when initiating and completing I/O."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:27
+msgid ""
+"*params* is used by the application to pass options to the kernel, and by"
+" the kernel to convey information about the ring buffers."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:44
+msgid ""
+"The *flags*, *sq_thread_cpu*, and *sq_thread_idle* fields are used to "
+"configure the io_uring instance. *flags* is a bit mask of 0 or more of "
+"the following values ORed together:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:58
+msgid "**IORING_SETUP_IOPOLL**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:49
+msgid ""
+"Perform busy-waiting for an I/O completion, as opposed to getting "
+"notifications via an asynchronous IRQ (Interrupt Request). The file "
+"system (if any) and block device must support polling in order for this "
+"to work. Busy-waiting provides lower latency, but may consume more CPU "
+"resources than interrupt driven I/O. Currently, this feature is usable "
+"only on a file descriptor opened using the **O_DIRECT** flag. When a read"
+" or write is submitted to a polled context, the application must poll for"
+" completions on the CQ ring by calling **io_uring_enter**\\ (2). It is "
+"illegal to mix and match polled and non-polled I/O on an io_uring "
+"instance."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:67
+msgid "**IORING_SETUP_SQPOLL**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:61
+msgid ""
+"When this flag is specified, a kernel thread is created to perform "
+"submission queue polling. An io_uring instance configured in this way "
+"enables an application to issue I/O without ever context switching into "
+"the kernel. By using the submission queue to fill in new submission queue"
+" entries and watching for completions on the completion queue, the "
+"application can submit and reap I/Os without doing a single system call."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:69
+msgid ""
+"If the kernel thread is idle for more than *sq_thread_idle* milliseconds,"
+" it will set the **IORING_SQ_NEED_WAKEUP** bit in the *flags* field of "
+"the *struct io_sq_ring*. When this happens, the application must call "
+"**io_uring_enter**\\ (2) to wake the kernel thread. If I/O is kept busy, "
+"the kernel thread will never sleep. An application making use of this "
+"feature will need to guard the **io_uring_enter**\\ (2) call with the "
+"following code sequence:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:87
+msgid ""
+"where *sq_ring* is a submission queue ring setup using the *struct "
+"io_sqring_offsets* described below."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:90
+msgid ""
+"To successfully use this feature, the application must register a set of "
+"files to be used for IO through **io_uring_register**\\ (2) using the "
+"**IORING_REGISTER_FILES** opcode. Failure to do so will result in "
+"submitted IO being errored with **EBADF.**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:99
+msgid "**IORING_SETUP_SQ_AFF**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:96
+msgid ""
+"If this flag is specified, then the poll thread will be bound to the cpu "
+"set in the *sq_thread_cpu* field of the *struct io_uring_params*. This "
+"flag is only meaningful when **IORING_SETUP_SQPOLL** is specified."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:104
+msgid "**IORING_SETUP_CQSIZE**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:102
+msgid ""
+"Create the completion queue with *struct io_uring_params.cq_entries* "
+"entries. The value must be greater than *entries*, and may be rounded up "
+"to the next power-of-two."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:106
+msgid ""
+"If no flags are specified, the io_uring instance is setup for interrupt "
+"driven I/O. I/O may be submitted using **io_uring_enter**\\ (2) and can "
+"be reaped by polling the completion queue."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:110
+msgid "The *resv* array must be initialized to zero."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:112
+msgid ""
+"*features* is filled in by the kernel, which specifies various features "
+"supported by current kernel version."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:118
+msgid "**IORING_FEAT_SINGLE_MMAP**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:116
+msgid ""
+"If this flag is set, the two SQ and CQ rings can be mapped with a single "
+"*mmap(2)* call. The SQEs must still be allocated separately. This brings "
+"the necessary *mmap(2)* calls down from three to two."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:128
+msgid "**IORING_FEAT_NODROP**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:121
+msgid ""
+"If this flag is set, io_uring supports never dropping completion events. "
+"If a completion event occurs and the CQ ring is full, the kernel stores "
+"the event internally until such a time that the CQ ring has room for more"
+" entries. If this overflow condition is entered, attempting to submit "
+"more IO with fail with the **-EBUSY** error value, if it can't flush the "
+"overflown events to the CQ ring. If this happens, the application must "
+"reap events from the CQ ring and attempt the submit again."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:132
+msgid "**IORING_FEAT_SUBMIT_STABLE**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:131
+msgid ""
+"If this flag is set, applications can be certain that any data for async "
+"offload has been consumed when the kernel has consumed the SQE."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:143
+msgid "**IORING_FEAT_RW_CUR_POS**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:135
+msgid ""
+"If this flag is set, applications can specify *offset* == -1 with "
+"**IORING_OP_{READV,WRITEV}** , **IORING_OP_{READ,WRITE}_FIXED** , and "
+"**IORING_OP_{READ,WRITE}** to mean current file position, which behaves "
+"like *preadv2(2)* and *pwritev2(2)* with *offset* == -1. It'll use (and "
+"update) the current file position. This obviously comes with the caveat "
+"that if the application has multiple reads or writes in flight, then the "
+"end result will not be as expected. This is similar to threads sharing a "
+"file descriptor and doing IO using the current file position."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:155
+msgid "**IORING_FEAT_CUR_PERSONALITY**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:146
+msgid ""
+"If this flag is set, then io_uring guarantees that both sync and async "
+"execution of a request assumes the credentials of the task that called "
+"*io_uring_enter(2)* to queue the requests. If this flag isn't set, then "
+"requests are issued with the credentials of the task that originally "
+"registered the io_uring. If only one task is using a ring, then this flag"
+" doesn't matter as the credentials will always be the same. Note that "
+"this is the default behavior, tasks can still register different "
+"personalities through *io_uring_register(2)* with "
+"**IORING_REGISTER_PERSONALITY** and specify the personality to use in the"
+" sqe."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:157
+msgid ""
+"The rest of the fields in the *struct io_uring_params* are filled in by "
+"the kernel, and provide the information necessary to memory map the "
+"submission queue, completion queue, and the array of submission queue "
+"entries. *sq_entries* specifies the number of submission queue entries "
+"allocated. *sq_off* describes the offsets of various ring buffer fields:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:176
+msgid ""
+"Taken together, *sq_entries* and *sq_off* provide all of the information "
+"necessary for accessing the submission queue ring buffer and the "
+"submission queue entry array. The submission queue can be mapped with a "
+"call like:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:187
+msgid ""
+"where *sq_off* is the *io_sqring_offsets* structure, and *ring_fd* is the"
+" file descriptor returned from **io_uring_setup**\\ (2). The addition of "
+"*sq_off.array* to the length of the region accounts for the fact that the"
+" ring located at the end of the data structure. As an example, the ring "
+"buffer head pointer can be accessed by adding *sq_off.head* to the "
+"address returned from **mmap**\\ (2):"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:198
+msgid ""
+"The *flags* field is used by the kernel to communicate state information "
+"to the application. Currently, it is used to inform the application when "
+"a call to **io_uring_enter**\\ (2) is necessary. See the documentation "
+"for the **IORING_SETUP_SQPOLL** flag above. The *dropped* member is "
+"incremented for each invalid submission queue entry encountered in the "
+"ring buffer."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:205
+msgid ""
+"The head and tail track the ring buffer state. The tail is incremented by"
+" the application when submitting new I/O, and the head is incremented by "
+"the kernel when the I/O has been successfully submitted. Determining the "
+"index of the head or tail into the ring is accomplished by applying a "
+"mask:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:215
+msgid "The array of submission queue entries is mapped with:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:223
+msgid "The completion queue is described by *cq_entries* and *cq_off* shown here:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:238
+msgid ""
+"The completion queue is simpler, since the entries are not separated from"
+" the queue itself, and can be mapped with:"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:247
+msgid ""
+"Closing the file descriptor returned by **io_uring_setup**\\ (2) will "
+"free all resources associated with the io_uring context."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:251
+msgid "RETURN VALUE"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:253
+msgid ""
+"**io_uring_setup**\\ (2) returns a new file descriptor on success. The "
+"application may then provide the file descriptor in a subsequent "
+"**mmap**\\ (2) call to map the submission and completion queues, or to "
+"the **io_uring_register**\\ (2) or **io_uring_enter**\\ (2) system calls."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:258
+msgid "On error, -1 is returned and *errno* is set appropriately."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:261
+msgid "ERRORS"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:264
+msgid "**EFAULT**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:264
+msgid "params is outside your accessible address space."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:271
+msgid "**EINVAL**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:267
+msgid ""
+"The resv array contains non-zero data, p.flags contains an unsupported "
+"flag, *entries* is out of bounds, **IORING_SETUP_SQ_AFF** was specified, "
+"but **IORING_SETUP_SQPOLL** was not, or **IORING_SETUP_CQSIZE** was "
+"specified, but *io_uring_params.cq_entries* was invalid."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:276
+msgid "**EMFILE**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:274
+msgid ""
+"The per-process limit on the number of open file descriptors has been "
+"reached (see the description of **RLIMIT_NOFILE** in **getrlimit**\\ "
+"(2))."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:280
+msgid "**ENFILE**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:279
+msgid "The system-wide limit on the total number of open files has been reached."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:283
+msgid "**ENOMEM**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:283
+msgid "Insufficient kernel resources are available."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:287
+msgid "**EPERM**"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:286
+msgid ""
+"**IORING_SETUP_SQPOLL** was specified, but the effective user ID of the "
+"caller did not have sufficient privileges."
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:290
+msgid "SEE ALSO"
+msgstr ""
+
+#: ../../ref-iouring/io_uring_setup.rst:292
+msgid "**io_uring_register**\\ (2), **io_uring_enter**\\ (2)"
+msgstr ""
+

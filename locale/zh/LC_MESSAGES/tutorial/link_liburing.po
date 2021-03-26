@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../tutorial/link_liburing.rst:4
+msgid "Linking requests"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:5
+msgid ""
+"In ``io_uring``, completions do not arrive in the order that submissions "
+"were issues in. This was discussed in the chapter :ref:`The Low-level "
+"io_uring Interface <low_level>`. What if you want to force certain "
+"operations to happen in order? This is possible by linking requests "
+"together. The example here shows you how it's done."
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:88
+msgid ""
+"This is a fairly simple program. We open an empty file, write a string to"
+" it, read the string from the file and then close it. Since ``io_uring`` "
+"does not guarantee that operations submitted will be executed in order, "
+"it might be a problem for our program. Since it is an empty file that is "
+"truncated at every run of the program, there will be nothing to read if "
+"the write operation does not complete before the read. Also, if the close"
+" operation completed before either the read or write operations or both "
+"operations, those might fail as well. For this reason, this program links"
+" operations with the ``IOSQE_IO_LINK`` flag. This ensures that operations"
+" are executed one after the other."
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:90
+msgid ""
+"This program is fairly simple to understand. In the ``link_operations()``"
+" function, we call :c:func:`io_uring_prep_write`, but then set the "
+"``IOSQE_IO_LINK`` flag on it so that the next operation is linked to this"
+" operation. Next, we call :c:func:`io_uring_prep_read`, which is now "
+"linked to the previous write operation. We set the ``IOSQE_IO_LINK`` flag"
+" on this operation as well so that the subsequent close operation, which "
+"we set up with :c:func:`io_uring_prep_close` is linked with this. This "
+"causes ``io_uring`` to execute the write, read and close operations one "
+"after the other."
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:93
+msgid "Failure in the chain"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:94
+msgid ""
+"When linked operations are involved, the failure of a one operation will "
+"cause all subsequent linked operations to fail with the error \"Operation"
+" cancelled.\". Normally, you should this output if you run this program "
+"on kernel version 5.6 or above:"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:104
+msgid "If we switch them ``open()`` statement from"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:110
+msgid "to this, in which we open the file in a write-only mode:"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:116
+msgid ""
+"our write operation should go through, but our read operation will fail "
+"since the file is now open in write-only mode. Since the subsequent close"
+" operation is linked to the read operation, it should fail, too. The "
+"output of this flawed program will now be:"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:126
+msgid ""
+"The first error (\"Bad file descriptor\") you're seeing is from the "
+"failing read operation. The next error you're seeing (\"Operation "
+"cancelled\") is ``io_uring`` cancelling the linked close operation."
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:130
+msgid ""
+"Please note that you need kernel 5.6 or better for this example to work "
+"since the read, write and close operations aren't supported in earlier "
+"versions."
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:133
+msgid "Source code"
+msgstr ""
+
+#: ../../tutorial/link_liburing.rst:134
+msgid ""
+"Source code for this and other examples is `available on Github "
+"<https://github.com/shuveb/loti-examples>`_."
+msgstr ""
+

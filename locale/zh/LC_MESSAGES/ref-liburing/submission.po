@@ -1,0 +1,785 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/submission.rst:5
+msgid "Submission"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:8
+msgid "Introduction"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:10
+msgid "Submitting an I/O request is a sequence that generally looks like this:"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:24
+msgid "This snippet is from the example :ref:`cat with liburing<cat_liburing>`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:26
+msgid ""
+"You call :c:func:`io_ring_get_sqe` to get an submission queue entry or "
+"SQE, use one of the submission helpers for the type of I/O you're trying "
+"to get done like :c:func:`io_uring_prep_readv` or "
+":c:func:`io_uring_prep_accept`, call :c:func:`io_uring_set_sqe_data` to "
+"get a pointer to a a data structure that uniquely identifies this request"
+" (you get this same user data back on the completion side), and finally "
+"call :c:func:`io_uring_submit` to submit the request."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:28
+msgid ""
+"You can also set up polling as to avoid calling the "
+":c:func:`io_uring_submit` system call. TODO: link polling example here."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:34
+msgid ""
+"This function returns a submission queue entry that can be used to submit"
+" an I/O operation. You can call this function multiple times to queue up "
+"I/O requests before calling :c:func:`io_uring_submit` to tell the kernel "
+"to process your queued requests."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:36 ../../ref-liburing/submission.rst:55
+#: ../../ref-liburing/submission.rst:66 ../../ref-liburing/submission.rst:77
+#: ../../ref-liburing/submission.rst:93 ../../ref-liburing/submission.rst:118
+#: ../../ref-liburing/submission.rst:131 ../../ref-liburing/submission.rst:152
+#: ../../ref-liburing/submission.rst:173 ../../ref-liburing/submission.rst:194
+#: ../../ref-liburing/submission.rst:217 ../../ref-liburing/submission.rst:240
+#: ../../ref-liburing/submission.rst:267 ../../ref-liburing/submission.rst:287
+#: ../../ref-liburing/submission.rst:304 ../../ref-liburing/submission.rst:325
+#: ../../ref-liburing/submission.rst:345 ../../ref-liburing/submission.rst:365
+#: ../../ref-liburing/submission.rst:384 ../../ref-liburing/submission.rst:403
+#: ../../ref-liburing/submission.rst:422 ../../ref-liburing/submission.rst:446
+#: ../../ref-liburing/submission.rst:477 ../../ref-liburing/submission.rst:509
+#: ../../ref-liburing/submission.rst:529 ../../ref-liburing/submission.rst:548
+#: ../../ref-liburing/submission.rst:569 ../../ref-liburing/submission.rst:587
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:38 ../../ref-liburing/submission.rst:79
+msgid ""
+"`ring`: :c:struct:`io_uring` structure as set up by "
+":c:func:`io_uring_queue_init`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:40
+msgid ""
+"**Return value**: a pointer to :c:struct:`io_uring_sqe` that represents a"
+" vacant SQE. NULL is returned if the submission queue is full."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:42
+msgid ""
+"Please see the :ref:`submission introduction code snippet <submission-"
+"intro-snippet>` for example usage."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:46 ../../ref-liburing/submission.rst:84
+msgid ":ref:`io_uring low-level interface programming <low_level>`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:47 ../../ref-liburing/submission.rst:85
+msgid ":ref:`cp utility with liburing<cp_liburing>`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:53
+msgid ""
+"This is an inline convenience function that sets the user data field of "
+"the SQE instance passed in."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:57 ../../ref-liburing/submission.rst:68
+msgid "`sqe`: the SQE instance for which you want to set the user data."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:58
+msgid "`data`: a pointer to the user data."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:64
+msgid ""
+"This is an inline convenience function that sets the flags field of the "
+"SQE instance passed in."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:69
+msgid ""
+"`flags`: the flags you want to set. This is a bitmap field. Please see "
+"the :ref:`io_uring_enter` reference page for various SQE flags and what "
+"they mean."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:75
+msgid ""
+"Submits the SQEs acquired via :c:func:`io_uring_get_sqe` to the kernel. "
+"You can call this once after you have called :c:func:`io_uring_get_sqe` "
+"multiple times to set up multiple I/O requests."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:81 ../../ref-liburing/submission.rst:97
+msgid "**Return value**: returns the number of SQEs submitted."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:91
+msgid ""
+"Same as :c:func:`io_uring_submit`, but takes an additional parameter "
+"``wait_nr`` that lets you specify how many completions to wait for. This "
+"call will block until ``wait_nr`` submission requests are processed by "
+"the kernel and their details placed in the completion queue."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:95
+msgid "`wait_nr`: The number of completions to wait for."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:102
+msgid "Submission helpers"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:104
+msgid ""
+"Submission helpers are convenience functions that make it easy to specify"
+" the I/O operation you want to request via an SQE. There is one function "
+"per supported I/O type."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:107
+msgid ""
+"Please see the :ref:`submission introduction code snippet <submission-"
+"intro-snippet>` for example usage of the :c:func:`io_uring_prep_readv` "
+"function."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:116
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an ``IORING_OP_NOP`` operation, which is a no-op. This kind of "
+"operation exists for testing purposes and serves to test the speed and "
+"efficiency of the ``io_uring`` interface."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:120 ../../ref-liburing/submission.rst:133
+#: ../../ref-liburing/submission.rst:154 ../../ref-liburing/submission.rst:175
+#: ../../ref-liburing/submission.rst:196 ../../ref-liburing/submission.rst:219
+#: ../../ref-liburing/submission.rst:242 ../../ref-liburing/submission.rst:269
+#: ../../ref-liburing/submission.rst:289 ../../ref-liburing/submission.rst:306
+#: ../../ref-liburing/submission.rst:327 ../../ref-liburing/submission.rst:347
+#: ../../ref-liburing/submission.rst:367 ../../ref-liburing/submission.rst:386
+#: ../../ref-liburing/submission.rst:405 ../../ref-liburing/submission.rst:424
+#: ../../ref-liburing/submission.rst:448 ../../ref-liburing/submission.rst:479
+#: ../../ref-liburing/submission.rst:511 ../../ref-liburing/submission.rst:531
+#: ../../ref-liburing/submission.rst:550 ../../ref-liburing/submission.rst:571
+#: ../../ref-liburing/submission.rst:589
+msgid ""
+"`sqe`: pointer to an SQE as generally returned by "
+":c:func:`io_uring_get_sqe`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:129
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a read operation."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:134 ../../ref-liburing/submission.rst:176
+#: ../../ref-liburing/submission.rst:197 ../../ref-liburing/submission.rst:243
+#: ../../ref-liburing/submission.rst:270 ../../ref-liburing/submission.rst:290
+msgid "`fd`: the file descriptor to read from."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:135 ../../ref-liburing/submission.rst:198
+#: ../../ref-liburing/submission.rst:244
+msgid "`buf`: the buffer to copy the read data into."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:136 ../../ref-liburing/submission.rst:199
+#: ../../ref-liburing/submission.rst:245
+msgid "`nbytes`: number of bytes to read."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:137 ../../ref-liburing/submission.rst:179
+#: ../../ref-liburing/submission.rst:200 ../../ref-liburing/submission.rst:246
+msgid "`offset`: absolute offset of the file to read from."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:140 ../../ref-liburing/submission.rst:205
+#: ../../ref-liburing/submission.rst:251 ../../ref-liburing/submission.rst:275
+msgid ":man:`read(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:141 ../../ref-liburing/submission.rst:162
+#: ../../ref-liburing/submission.rst:206 ../../ref-liburing/submission.rst:252
+#: ../../ref-liburing/submission.rst:276
+msgid ":man:`lseek(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:150
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a write operation."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:155 ../../ref-liburing/submission.rst:220
+msgid "`fd`: the file descriptor to write to."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:156
+msgid "`buf`: the buffer to write data from."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:157
+msgid "`nbytes`: number of bytes to write."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:158 ../../ref-liburing/submission.rst:223
+msgid "`offset`: absolute offset of the file to write to."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:161
+msgid ":man:`write(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:171
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a \"scatter\" read operation, much like :man:`readv(2)` or "
+":man:`preadv(2)`, which are part of Linux's scatter/gather I/O family of "
+"system calls."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:177 ../../ref-liburing/submission.rst:221
+msgid "`iovecs`: pointer to an array of ``iovec`` structures"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:178 ../../ref-liburing/submission.rst:222
+msgid ""
+"`nr_vecs`: number of ``iovec`` instances in the array pointed to by the "
+"``iovecs`` argument."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:182
+msgid ":man:`readv(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:183
+msgid ""
+":ref:`cat utility example with liburing <cat_liburing>` which uses this "
+"function"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:192 ../../ref-liburing/submission.rst:238
+msgid ""
+"Much like :c:func:`io_uring_prep_read`, this function sets up the "
+"submission queue entry pointed to by ``sqe`` with a read operation. The "
+"main difference is that this function is designed to work with fixed set "
+"of pre-allocated buffers registered via :c:func:`io_uring_register`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:201 ../../ref-liburing/submission.rst:247
+msgid "`buf_index`: index of the set of pre-allocated buffers to use."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:204 ../../ref-liburing/submission.rst:250
+#: ../../ref-liburing/submission.rst:274
+msgid ":c:func:`io_uring_register`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:215
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a \"gather\" write operation, much like :man:`writev(2)` or "
+":man:`pwritev(2)`, which are part of Linux's scatter/gather I/O family of"
+" system calls."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:226
+msgid ":man:`writev(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:227
+msgid ""
+":ref:`cp utility example with liburing <cp_liburing>` which uses this "
+"function"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:236
+msgid "TODO: fixed buffers example to be added."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:261
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`fsync(2)` like operation. This causes any \"dirty\" buffers"
+" of the file's data and metadata in the disk cache to be synced to disk."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:265
+msgid ""
+"It is important to note that queuing up this operation does not guarantee"
+" that any write operations that are queued up before this operation will "
+"have the data they write to the file synced to disk. This is because "
+"operations from the submission queue could be picked up and executed by "
+"the kernel in parallel. This sync operation could finish well before "
+"other write operations that were queued in front of it. What effect it "
+"does have is any of the file's already existing \"dirty\" buffers--at the"
+" time at which this operation is executed--are synced to disk."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:271
+msgid ""
+"`fsync_flags`: This can either be 0 or ``IORING_FSYNC_DATASYNC``, which "
+"makes it act like :man:`fdatasync(2)`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:285
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`close(2)` like operation. This causes the file descriptor "
+"pointed to by ``fd`` to be closed."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:293
+msgid ":man:`close(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:302
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`openat(2)` like operation. This causes the file pointed to "
+"by ``path`` to be opened in a path relative to the directory represented "
+"by ``dfd`` directory file descriptor."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:307 ../../ref-liburing/submission.rst:328
+msgid ""
+"`dfd`: the directory file descriptor representing a directory relative to"
+" which the file is to be opened."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:308 ../../ref-liburing/submission.rst:329
+msgid "`path`: path name of the file to be opened."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:309
+msgid "`flags`: These are access mode flags. The same as in :man:`open(2)`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:310
+msgid ""
+"`mode`: File permission bits applied when creating a new file. The same "
+"as in :man:`open(2)`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:313
+msgid ":man:`openat(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:314 ../../ref-liburing/submission.rst:334
+msgid ":man:`open(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:323
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`openat2(2)` like operation. This causes the file pointed to"
+" by ``path`` to be opened in a path relative to the directory represented"
+" by ``dfd`` directory file descriptor."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:330
+msgid ""
+"`how`: a pointer to a ``open_how`` structure which let you control how "
+"exactly you want to open the file. See :man:`openat2(2)` for more "
+"details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:333
+msgid ":man:`openat2(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:343
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`fallocate(2)` like operation. The :man:`fallocate(2)` "
+"system call is used to allocate, deallocate, collapse, zero or increase "
+"file space for the file represented by the file descriptor ``fd``. See "
+":man:`fallocate(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:348
+msgid "`fd`: the file descriptor of the file to conduct the operation on."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:349
+msgid ""
+"`mode`: described the operation to conduct on the file. See "
+":man:`fallocate(2)` for details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:350
+msgid "`offset`: The offset of the file at which to begin operation."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:351
+msgid "`len`: operation length."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:354
+msgid ":man:`fallocate(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:363
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`statx(2)` like operation. The :man:`statx(2)` system call "
+"gets meta information on the file pointed to by ``path`` which is filled "
+"up into a ``statx`` structure pointed to by ``statxbuf``. See "
+":man:`statx(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:368
+msgid ""
+"`dfd`: depending on the value of this and ``path``, the file pointed to "
+"by ``path`` can be interpreted as an absolute, relative to process or "
+"relative to the directory referred to by a directory descriptor in "
+"``dfd`` along with other types of interpretations are possible. See "
+":man:`statx(2)` for details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:369
+msgid ""
+"`path`: file path. Interpreted in combination with value in ``dfd``. See "
+":man:`statx(2)` for details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:370
+msgid ""
+"`flags`: this is used to influence how the path name is looked up. It can"
+" also influence what sort of synchronization the kernel will do when "
+"querying a file on a remote filesystem. See :man:`statx(2)` for details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:373
+msgid ":man:`statx(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:382
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`posix_fadvise(2)` like operation. The "
+":man:`posix_fadvise(2)` system call lets the application advise the "
+"operating system how it plans to access data in the file represented by "
+"the file descriptor ``fd``--sequentially, randomly or otherwise. This is "
+"with the intention to better the performance of the application. See "
+":man:`posix_fdavise(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:387
+msgid "`fd`: the file descriptor of the file to give advice about."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:388
+msgid "`offset`: the offset of the file starting with which the advice applies."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:389 ../../ref-liburing/submission.rst:407
+msgid "`len`: the length until which the advice applies."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:392
+msgid ":man:`posix_fadvise(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:401
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with an :man:`madvise(2)` like operation. The :man:`madvise(2)` system "
+"call lets the application advise the operating system on memory pointed "
+"to by ``addr`` up to ``length`` bytes. The advice could be on how the "
+"application plans to access that said range of memory (sequentially, "
+"randomly or otherwise) or if the operating system should not share it "
+"when the process forks children, among other things. This is with the "
+"intention to better the performance of the application. See "
+":man:`mdavise(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:406
+msgid "`addr`: starting address of the memory range to which the advice applies."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:410
+msgid ":man:`madvise(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:420
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`splice(2)` like operation. The :man:`splice(2)` system call "
+"copies data between two file descriptors (``fd_in`` and ``fd_out``) "
+"without copying data between kernel address space and user address space."
+" However, one of the file descriptors must represent a pipe. See "
+":man:`splice(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:425
+msgid "`fd_in`: the file descriptor to read from."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:426
+msgid ""
+"`off_in`: Has to be NULL if ``fd_in`` refers to a pipe. If ``fd_in`` is "
+"not a pipe and:"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:428
+msgid ""
+"``off_in`` is NULL, then data from ``fd_in`` is read from its file offset"
+" and the file offset is adjusted accordingly."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:429
+msgid ""
+"``off_in`` is non-NULL, then then ``off_in`` must point  to  a  buffer  "
+"which specifies  the starting offset from which bytes will be read from "
+"``fd_in``. In this case, the file offset of ``fd_in`` is left unchanged."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:430
+msgid ""
+"`fd_out` and `off_out`: Analogous statement such as those for ``fd_in`` "
+"and ``off_in`` apply for these arguments."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:431
+msgid "`nbytes`: number of bytes to copy"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:432
+msgid ""
+"`flags`: a bit mask that influences the copy. See :man:`splice(2)` for "
+"details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:435
+msgid ":man:`splice(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:444
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`recvmsg(2)` like operation. The :man:`recvmsg(2)` system "
+"call is used to read data from a socket. It uses a ``msghdr`` structure "
+"to reduce the number of arguments it takes. This call works with both "
+"connection-oriented (like TCP) and connectionless (like UDP) sockets. See"
+" :man:`recvmsg(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:449 ../../ref-liburing/submission.rst:480
+msgid "`fd`: the socket to read from."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:450
+msgid "`msg`: pointer to an ``msghdr`` structure."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:451
+msgid ""
+"`flags`: a bit mask that influences the read. See :man:`recvmsg(2)` for "
+"details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:454
+msgid ":man:`recvmsg(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:463
+msgid "The same as :c:func:`io_uring_prep_recvmsg`, but for writing to a socket."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:466
+msgid ":man:`sendmsg(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:475
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`recv(2)` like operation. The :man:`recv(2)` system call is "
+"used to read data from a socket. It uses a ``msghdr`` structure to reduce"
+" the number of arguments it takes. This call works with both connection-"
+"oriented (like TCP) and connectionless (like UDP) sockets. Without the "
+"``flags`` argument, it is the exact equivalent of :man:`read(2)` except "
+"one small difference while dealing with zero-length datagrams. See "
+":man:`recv(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:481
+msgid "`buf`: pointer to a buffer to read data into."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:482
+msgid "`len`: count of bytes to read."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:483
+msgid ""
+"`flags`: a bit mask that influences the read. See :man:`recv(2)` for "
+"details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:486
+msgid ":man:`recv(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:495
+msgid "The same as :c:func:`io_uring_prep_recv`, but for writing to a socket."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:498
+msgid ":man:`send(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:507
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`accept4(2)` like operation. The :man:`accept4(2)` system "
+"call is used with connection-oriented socket types (SOCK_STREAM, "
+"SOCK_SEQPACKET). It extracts the first connection request on the queue of"
+" pending connections for the listening socket ``fd``. With the ``flags`` "
+"argument set to 0, :man:`accept4(2)` is the exact equivalent of "
+":man:`accept(2)`. See :man:`accept4(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:512 ../../ref-liburing/submission.rst:532
+msgid "`fd`: the listening socket."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:513
+msgid ""
+"`addr`: pointer to a ``sockaddr`` structure. This will be filled with the"
+" address of the peer."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:514 ../../ref-liburing/submission.rst:534
+msgid ""
+"`addrlen`: pointer to ``socklen_t``. A value-result argument that must be"
+" filled in with the size of the ``sockaddr`` structure for the call and "
+"which will be set to the size of the peer address."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:515
+msgid ""
+"`flags`: a bit mask that influences the system call. See "
+":man:`accept4(2)` for details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:518
+msgid ":man:`accept4(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:527
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`connect(2)` like operation. The :man:`connect(2)` system "
+"call is used to connect the socket referred to in ``fd`` to the address "
+"specified in ``addr``. See :man:`connect(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:533
+msgid ""
+"`addr`: pointer to a ``sockaddr`` structure containing the address of the"
+" peer."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:537
+msgid ":man:`connect(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:546
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`epoll_ctl(2)` like operation. The :man:`epoll_ctl(2)` system"
+" call is used to add or remove modify entries in the interest list of the"
+" :man:`epoll(7)` instance referred by ``epfd``. The add, remove or modify"
+" operation specified by ``op`` is applied on the file descriptor ``fd``. "
+"See :man:`epoll_ctl(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:551
+msgid "`epfd`: file descriptor representing and ``epoll`` instance."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:552
+msgid "`fd`: the file descriptor to add, delete or modify."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:553
+msgid ""
+"`op`: the ``epoll`` operation to perform (``EPOLL_CTL_ADD``, "
+"``EPOLL_CTL_DEL`` or ``EPOLL_CTL_MOD``)."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:554
+msgid "`ev`: pointer to an ``epoll_event`` structure."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:557
+msgid ":man:`epoll_ctl(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:558
+msgid ":man:`epoll(7)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:567
+msgid ""
+"This function sets up the submission queue entry pointed to by ``sqe`` "
+"with a :man:`poll(2)` like operation to add a file descriptor to "
+"``poll``'s interest list and to listen to events specified in "
+"``poll_mask``. Unlike ``poll`` or ``epoll`` without ``EPOLLONESHOT``, "
+"this interface always works in one-shot mode. That is, once the poll "
+"operation is completed, it will have to be resubmitted. See "
+":man:`poll(2)` for more details."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:572
+msgid "`fd`: file descriptor to poll for events."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:573
+msgid "`poll_mask`: bit mask containg events to listen for."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:576 ../../ref-liburing/submission.rst:593
+msgid ":man:`poll(2)`"
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:585
+msgid "Remove from a request from monitoring by :man:`poll(2)`."
+msgstr ""
+
+#: ../../ref-liburing/submission.rst:590
+msgid ""
+"`user_data`: pointer to user data. The request associated with this user "
+"data is removed from further monitoring."
+msgstr ""
+

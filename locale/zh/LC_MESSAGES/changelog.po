@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../changelog.rst:4
+msgid "Changelog"
+msgstr ""
+
+#: ../../changelog.rst:5
+msgid "So you know when things are out of date."
+msgstr ""
+
+#: ../../changelog.rst:8
+msgid "2020-06-15"
+msgstr ""
+
+#: ../../changelog.rst:10
+msgid ""
+"Adding explanation around ``IORING_FEAT_SINGLE_MMAP`` and how it reduces "
+"the need for :man:`mmap(2)` calls from 3 to 2. Affected pages:"
+msgstr ""
+
+#: ../../changelog.rst:10
+msgid ":ref:`what_is_io_uring`"
+msgstr ""
+
+#: ../../changelog.rst:11
+msgid ":ref:`low_level`"
+msgstr ""
+

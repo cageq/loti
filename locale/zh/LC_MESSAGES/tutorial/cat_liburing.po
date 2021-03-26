@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../tutorial/cat_liburing.rst:4
+msgid "``cat`` with liburing"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:5
+msgid ""
+"We saw that building something as simple as a program that reads a file "
+"may not be as straightforward with io_uring. It turns out it is more code"
+" than a program that reads files with synchronous I/O. But if you analyze"
+" the code for the :ref:`cat utility that used the low-level io_uring "
+"interface <low_level>`, you’ll realize that bulk of the code there is "
+"boilerplate code that can be easily hidden away in a separate file and it"
+" shouldn’t bother with application logic. In any case, we’re learning "
+"low-level ``io_uring`` details on purpose for better understanding of how"
+" it works. With that out of the way, let’s now look at how a functionally"
+" similar program can be implemented using ``liburing``."
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:175
+msgid "Let’s compare the number of lines each of these implementations took:"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:177
+msgid "Cat with raw io_uring: ~360 lines"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:178
+msgid "Cat with liburing: ~160 lines"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:180
+msgid ""
+"Now, that’s some real reduction in the number of lines of code with "
+"liburing. And with all the boilerplate code out of the way, the logic "
+"pops out. Let’s run through that quickly. We initialize io_uring like "
+"this:"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:186
+msgid ""
+"In the function submit_read_request(), we get an SQE, prepare it for a "
+"readv operation and submit it."
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:199
+msgid ""
+"We wait for a completion event and get the user data we set on the "
+"submission side like this:"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:207
+msgid ""
+"Of course, this is so much more simpler to use compared to using the raw "
+"interface."
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:211
+msgid ":c:func:`io_uring_queue_init`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:212
+msgid ":c:func:`io_uring_get_sqe`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:213
+msgid ":c:func:`io_uring_prep_readv`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:214
+msgid ":c:func:`io_uring_sqe_set_data`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:215
+msgid ":c:func:`io_uring_submit`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:216
+msgid ":c:func:`io_uring_wait_cqe`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:217
+msgid ":c:func:`io_uring_cqe_get_data`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:218
+msgid ":c:func:`io_uring_queue_exit`"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:221
+msgid "Source code"
+msgstr ""
+
+#: ../../tutorial/cat_liburing.rst:222
+msgid ""
+"Source code for this and other examples is `available on Github "
+"<https://github.com/shuveb/loti-examples>`_."
+msgstr ""
+

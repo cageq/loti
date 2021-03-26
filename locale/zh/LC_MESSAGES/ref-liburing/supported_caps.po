@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../ref-liburing/supported_caps.rst:4
+msgid "Supported capabilities"
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:5
+msgid ""
+"Functions that allow you to check for supported operations and "
+"capabilities."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:37
+#: ../../ref-liburing/supported_caps.rst:73
+#: ../../ref-liburing/supported_caps.rst:89
+msgid "**Parameters**"
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:39
+#: ../../ref-liburing/supported_caps.rst:91
+msgid ""
+"`ring`: :c:struct:`io_uring` structure as set up by "
+":c:func:`io_uring_queue_init`."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:41
+msgid ""
+"**Return value**: on success, a pointer to a :c:struct:`io_uring_probe` "
+"which is used to probe the capabilities of the ``io_uring`` subsystem of "
+"the running kernel. The :c:struct:`io_uring_probe` contains the list of "
+"supported operations. On failure, NULL is returned."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:44
+#: ../../ref-liburing/supported_caps.rst:58
+msgid ""
+"This function allocates memory to hold the structure "
+":c:struct:`io_uring_probe`. It is your responsibility to free it once "
+"you're done."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:53
+msgid ""
+"Returns a pointer to a :c:struct:`io_uring_probe` which is used to probe "
+"the capabilities of the ``io_uring`` subsystem of the running kernel. The"
+" :c:struct:`io_uring_probe` contains the list of supported operations."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:55
+msgid ""
+"This function is pretty much the same as "
+":c:func:`io_uring_get_probe_ring`, except that there is no need for you "
+"to setup a ring or have a reference to one. It sets up a temporary ring "
+"so that it can fetch the details of supported operations for you. It then"
+" destroys the ring before it returns."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:62
+msgid ""
+":ref:`Example program <probing_liburing>` to print supported ``io_uring``"
+" operation in the running kernel."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:71
+msgid ""
+"Function to determine of an ``io_uring`` operation is supported by your "
+"kernel. Returns 0 if the operation is not supported and a non-zero value "
+"if support is present. Take a look at :ref:`supported operations example "
+"program <probing_liburing>` to see this function in action."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:75
+msgid "`p`: pointer to a ``io_uring_probe`` structure."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:76
+msgid ""
+"`op`: operation you want to check support for. One of the IO_URING_OP_* "
+"macros."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:78
+msgid "**Return value**: 0 if operation not supported, 1 otherwise."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:87
+msgid "Low-level function that lets you get ``io_uring`` capabilities."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:92
+msgid "`p`: pointer to ``io_uring_probe`` structure."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:93
+msgid "`nr`: number of structures in the array that ``p`` points to."
+msgstr ""
+
+#: ../../ref-liburing/supported_caps.rst:95
+msgid ""
+"**Return value**: returns 0 on success and ``-errono`` on failure. You "
+"can use :man:`strerror(3)` to get a human readable version of the reason "
+"for failure."
+msgstr ""
+

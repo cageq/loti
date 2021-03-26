@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../tutorial/index.rst:2
+msgid "liburing Examples"
+msgstr "liburing 示例"
+
+#: ../../tutorial/index.rst:3
+msgid ""
+"As discussed in previous chapters, while being aware of how the low-level"
+" ``io_uring`` interface works is most certainly helpful, you might want "
+"to use ``liburing`` in more serious programs. ``liburing`` provides a "
+"more high-level interface to ``io_uring`` making it far more productive "
+"for you, while also removing a lot of boilerplate code, making your "
+"programs a lot shorter and to-the-point."
+msgstr ""
+"如前面几章所述，了解 ``io_uring`` 底层接口的工作原理无疑是很有帮助的，"
+"你可能使用 ``liburing`` 在更严肃的程序中。``liburing`` 提供了更高级的接口使得 ``io_uring`` 对你来说更具有生产力，"
+"同时还删除了很多样板代码，使您的程序简短得多，而且着重关键点。"
+
+#: ../../tutorial/index.rst:20
+msgid "Source code"
+msgstr "源码"
+
+#: ../../tutorial/index.rst:21
+msgid ""
+"Source code for this and other examples is `available on Github "
+"<https://github.com/shuveb/loti-examples>`_."
+msgstr ""
+"相关源码和其他例子 `在 Github 上 "
+"<https://github.com/shuveb/loti-examples>`_."

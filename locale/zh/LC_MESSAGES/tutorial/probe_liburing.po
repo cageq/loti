@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Shuveb Hussain
+# This file is distributed under the same license as the Lord of the
+# io_uring package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lord of the io_uring \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-24 23:08+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: ../../tutorial/probe_liburing.rst:4
+msgid "Probing supported capabilities"
+msgstr ""
+
+#: ../../tutorial/probe_liburing.rst:5
+msgid ""
+"The following program demonstrates how to use "
+":c:func:`io_uring_get_probe`. It prints if an operation is supported or "
+"not."
+msgstr ""
+
+#: ../../tutorial/probe_liburing.rst:7
+msgid "A program to print details about supported and unsupported operations"
+msgstr ""
+
+#: ../../tutorial/probe_liburing.rst:70
+msgid "Here is the output from the above program as run on Linux kernel 5.6.4"
+msgstr ""
+
+#: ../../tutorial/probe_liburing.rst:113
+msgid "Source code"
+msgstr ""
+
+#: ../../tutorial/probe_liburing.rst:114
+msgid ""
+"Source code for this and other examples is `available on Github "
+"<https://github.com/shuveb/loti-examples>`_."
+msgstr ""
+
