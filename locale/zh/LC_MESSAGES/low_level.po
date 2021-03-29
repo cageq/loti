@@ -397,7 +397,7 @@ msgstr ""
 
 #: ../../low_level.rst:575
 msgid "Source code"
-msgstr ""
+msgstr "源码"
 
 #: ../../low_level.rst:576
 msgid ""

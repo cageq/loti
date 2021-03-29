@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../../async_intro.rst:4
 msgid "Asynchronous Programming Under Linux"
-msgstr "Linux下的异步编程"
+msgstr "Linux下的异步编程 "
 
 #: ../../async_intro.rst:5
 msgid ""
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../../async_intro.rst:8
 msgid "Processes"
-msgstr "进程"
+msgstr "进程 "
 
 #: ../../async_intro.rst:9
 msgid ""
@@ -59,7 +59,7 @@ msgid ""
 "the fact that your program is preempted to run other programs, it is as "
 "if your program executes its logic in sequence."
 msgstr ""
-"一般来讲，当你调用一个系统调用 如 :man:`read(2)`， 你的程序会阻塞直到文件被读取数据可用。"
+"通常，当你调用一个系统调用 如 :man:`read(2)`， 你的程序会阻塞直到文件被读取数据可用。"
 "这一过程通常很快你基本上不会感受到你的程序被阻塞。你可能也不知道你的程序，特别是在一个繁忙的机器上，每秒切换出CPU几百次去运行其他的程序。"
 "当系统调用阻塞时，只要系统调用，运行在内核模式下的程序返回，你的程序就会被解除阻塞，继续运行。"
 "如果像通常的程序哪样，每次需要操作系统提供一些东西时，它就会持续这种从阻塞到非阻塞的循环。"
@@ -317,9 +317,10 @@ msgid ""
 msgstr ""
 "我们看到，使用同步编程，如:man:`accept(2)` 系统调用处理读和写或者远程连接时将会阻塞直到数据到来，或一个新的连接到来。"
 "直到那时，我们所说的进程或线程会被阻塞。如果我们需要做些其他事情怎么办？ 使用线程，你能创建其他的线程来处理这些其他的任务。"
-"如，主线程能阻塞在 :man:`accept(2)`  上，这样就可以立即处理新的客户端连接，而其他线程可能正在处理来自先前客户端的请求"
-"TODO 但是，如果您需要保持活动状态以接受客户端连接，同时又试图从客户端套接字读取数据，同时又试图读取或写入本地文件，该怎么办呢？ 一个提供（读取）和接受（写入）文件的FTP服务器正在处理套接字和常规文件描述符，这将是一个很好的例子。 您如何在一个线程或进程中执行此操作？"
-"TODO 这就是：man：`select（2）`，：man：`poll（2）和系统调用：man：`epoll（7）系列的出现。”
+"如，主线程能阻塞在 :man:`accept(2)`  上，这样就可以立即处理新的客户端连接，而其他线程可能正在处理来自先前客户端的请求， "
+"TODO 但是，如果您需要保持活动状态以接受客户端连接，同时又试图从客户端套接字读取数据，同时又试图读取或写入本地文件，该怎么办呢？ "
+"一个提供（读取）和接受（写入）文件的FTP服务器正在处理套接字和常规文件描述符，这将是一个很好的例子。 您如何在一个线程或进程中执行此操作？"
+"TODO 这就是：man：`select（2）`，：man：`poll（2）` 和系统调用：man：`epoll（7）` 系列的出现。"
 
 
 
@@ -348,6 +349,7 @@ msgid ""
 " both files and sockets. However, there are some limitations that you "
 "need to be aware of:"
 msgstr ""
+"Linux 的 :man:`aio(7)` 系统调用家族能用来异步处理文件和Sockets。然而，也有一些限制你需要关注："
 
 #: ../../async_intro.rst:66
 msgid ""
@@ -356,6 +358,8 @@ msgid ""
 "limitation. Not all applications under the usual circumstances want to "
 "open files in unbuffered mode."
 msgstr ""
+"只有使用 ``O_DIRECT`` 或无缓冲模式打开的文件支持 :man:`aio(7)`。这无疑是最大的限制。通常情况下不是所有应用程序使用无缓冲模式打开文件的。"
+
 
 #: ../../async_intro.rst:67
 msgid ""
@@ -371,6 +375,7 @@ msgid ""
 "Some storage devices have a fixed number of slots for requests. "
 ":man:`aio(7)` submission can block if all these slots are busy."
 msgstr ""
+"一些存储设备对请求有一些固定的槽位。如果所有嘈位满的情况下，:man:`aio(7)` 的提交会被阻塞。"
 
 #: ../../async_intro.rst:69
 msgid ""
@@ -378,12 +383,15 @@ msgid ""
 " are also two different system calls (one each for submission and "
 "completion) that need to be made for I/O."
 msgstr ""
+"在提交和完成操作的时候需要拷贝总共104字节的数据。 也有两个不同的系统调用（一个用来提交，一个用来完成）来操作 I/O"
+
 
 #: ../../async_intro.rst:71
 msgid ""
 "The above limitations introduce a lot of uncertainty and performance "
 "overheads in the :man:`aio(7)` subsystem."
 msgstr ""
+"上面的这些限制给 :man:`aio(7)` 带来了不确定性和性能负担"
 
 #: ../../async_intro.rst:74
 msgid "The trouble with regular files"
@@ -404,6 +412,15 @@ msgid ""
 "into why this is, but it is important to understand that while they work "
 "really well for sockets, they always return \"ready\" for regular files."
 msgstr ""
+"在一个并不繁忙的服务器上，读和写一个文件可能并不需要很长的时间。拿我们上面用异步方式写的的 FTP 服务器来举例说明。 "
+"当很多用户同时上传和下载一些非常大的文件时，有一个问题你需要直到，作为一个程序员。 "
+"在这种繁忙的服务器上， :man:`read(2)` 和 :man:`write(2)`  会开始大量阻塞。 但是难道 :man:`select(2)`, "
+":man:`poll(2)` 或者 :man:`epoll(7)` 这些多路复用的系统调用不能帮助我们吗？不幸的是，并不能。"
+"这些系统调用将 *一直* 说这些文件已经准备就绪进行 I/O 操作. 这是他们的致命弱点。我们不会深入探讨为什么会这样，"
+"但重要的是要了解，尽管它们确实能很好的处理套接字 ，但对于常规文件他们会一直返回 \"就绪\" "
+
+
+
 
 #: ../../async_intro.rst:77
 msgid ""
@@ -415,7 +432,9 @@ msgid ""
 "<https://blog.libtorrent.org/2012/10/asynchronous-disk-io/>`_ that "
 "surveys asynchronous I/O APIs on various operating systems."
 msgstr ""
-
+"不幸的是，这就使得文件描述符在异步编程下不一致，常规文件需要从文件描述符中区分出来。"
+"基于这个原因，像 ``libuv`` 这样的库使用一个单独的线程池来处理常规文件的 I/O 操作，公开的接口向用户隐藏了这些差异。"
+"请阅读这篇`优秀的文章 <https://blog.libtorrent.org/2012/10/asynchronous-disk-io/>`_ 来了不同操作系统上的解异步 I/O 接口"
 
 
 #: ../../async_intro.rst:80
@@ -433,10 +452,13 @@ msgid ""
 "``io_uring`` has over existing Linux asynchronous I/O APIs. We'll discuss"
 " more in upcoming sections."
 msgstr ""
+"不， ``io_uring`` 对常规文件和套接字表现出统一的接口，同时，由于这个接口的设计，程序能直接获取读取和写入文件描述符的数据，" 
+"而不是先知道一个文件描述符已经准备就绪，随后发起一个异步 I/O 操作，使用 :man:`poll(2)` 或 :man:`epoll(7)`。"
+"相比现存的异步 I/O 接口，这不是 ``io_uring`` 的唯一优势。我们会在接下来章节讨论更多。"
 
 #: ../../async_intro.rst:83
 msgid "Footnotes"
-msgstr ""
+msgstr "角注"
 
 #: ../../async_intro.rst:84
 msgid ""
@@ -448,4 +470,6 @@ msgid ""
 " in a process share the address space and thus do not incur this copying "
 "overhead."
 msgstr ""
+"在Linux下创建线程或进程都需要使用 :man:`clone(2)` 系统调来完成，会产生相同的开销，一旦创建完，如果一个子进程，将共享的父进程的只读地址空间写到自己的内存页中，"
+"内核创建为子进程创建一个父进程地址空间的拷贝，整个过程开销非常大。同一个进程里的线程共享地址空间，因此不会产生这种复制开销。"
 

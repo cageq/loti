@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../../tutorial/webserver_liburing.rst:4
 msgid "A web server with liburing"
-msgstr ""
+msgstr "使用 liburing 的 web 服务器"
 
 #: ../../tutorial/webserver_liburing.rst:6
 msgid ""
@@ -51,11 +51,11 @@ msgstr ""
 
 #: ../../tutorial/webserver_liburing.rst:16
 msgid "Let’s jump into the code now."
-msgstr ""
+msgstr "让我们直接看代码"
 
 #: ../../tutorial/webserver_liburing.rst:469
 msgid "Running this program"
-msgstr ""
+msgstr "运行这个程序"
 
 #: ../../tutorial/webserver_liburing.rst:470
 msgid ""
@@ -179,7 +179,7 @@ msgstr ""
 
 #: ../../tutorial/webserver_liburing.rst:649
 msgid "Source code"
-msgstr ""
+msgstr "源码"
 
 #: ../../tutorial/webserver_liburing.rst:650
 msgid ""
